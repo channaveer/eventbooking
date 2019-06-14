@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {User, validateUserSchema, validateUser}  = require(BASE_URL + '/models/user');
-const bcrypt    = require('bcrypt');
+const bcrypt    = require('bcryptjs');
 
 async function isEmailInuse(email) {
     return  await User.findOne({ 'email' : email });

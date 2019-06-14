@@ -1,6 +1,5 @@
 const mongoose      = require('mongoose');
 const Joi           = require('@hapi/joi');
-const bcrypt        = require('bcrypt');
 const userSchema    = new mongoose.Schema({
     firstname : {
         type        : String,
