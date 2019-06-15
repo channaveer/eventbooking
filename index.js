@@ -3,6 +3,11 @@ const users     = require(BASE_URL + '/routes/users');
 const error     = require(BASE_URL + '/middleware/errors');
 const express   = require('express');
 const app       = express();
+
+const helmet        = require('helmet');
+const compression   = require('compression');
+app.use(helmet());
+app.use(compression() );
 require(BASE_URL + '/startup/logging')();
 require(BASE_URL + '/startup/db')();
 
