@@ -1,5 +1,6 @@
 const mongoose      = require('mongoose');
 const Joi           = require('@hapi/joi');
+const jwt           = require('jsonwebtoken');
 const userSchema    = new mongoose.Schema({
     firstname : {
         type        : String,
@@ -32,6 +33,18 @@ const userSchema    = new mongoose.Schema({
 }, {
     timestamps : { createdAt: 'created_at', updatedAt : 'updated_at' }
 });
+
+userSchema.methods.generateAuthToken = function(){
+    return jwt.sign(
+        {
+            _id : this._id,
+        }, 
+        process.env.JWT_SECRET,
+        {
+            expiresIn: 60 * 60
+        }
+    );
+}
 
 const User = new mongoose.model('user', userSchema);
 

@@ -46,7 +46,7 @@ router.post('/create-user', async (req, res, next) => {
     });
     user = await user.save();
 
-    res.status(200).send({
+    res.header('x-authorization', user.generateAuthToken()).status(200).send({
         status  : 'success',
         message : "Added user successfully.",
         data    : {
@@ -93,7 +93,7 @@ router.post('/authenticate-user', async (req, res) => {
             } 
         });
     }
-    res.status(200).send({
+    res.header('x-authorization', user.generateAuthToken()).status(200).send({
         status  : 'success',
         message : 'Authenticated user successfully.',
         data    : {
